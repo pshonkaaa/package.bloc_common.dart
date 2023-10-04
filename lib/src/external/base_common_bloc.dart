@@ -72,7 +72,7 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
   }
 
   void _throwIfDisposed() {
-    if(initialized)
+    if(disposed)
       throw 'Bloc has been disposed';
   }
 }
