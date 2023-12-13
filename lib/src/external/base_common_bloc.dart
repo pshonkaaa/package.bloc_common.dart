@@ -8,12 +8,16 @@ import 'interfaces/IBlocEvent.dart';
 import 'interfaces/IRepository.dart';
 
 abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TContext> implements ICommonBloc<TEnum, TContext> {
+  static Logger? defaultLogger;
+
   BaseCommonBloc({
     required this.repository,
   }) {
     if(repository is! BaseRepository)
       throw ArgumentError('repository is! BaseRepository');
+
     _repository = repository as BaseRepository;
+    logger = BaseCommonBloc.defaultLogger;
   }
   
   final T repository;
