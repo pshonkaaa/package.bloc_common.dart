@@ -24,7 +24,7 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
 
 
   @override
-  Logger? get logger;
+  Logger? logger;
 
   @override
   late String tag = runtimeType.toString();
