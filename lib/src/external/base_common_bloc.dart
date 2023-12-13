@@ -61,7 +61,7 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
     _throwIfHaventInitialized();
     _throwIfDisposed();
 
-    logger?.d('$tag > onEvent; type = $type; event = ${event.toPrettyPrint().toString()}');
+    logger?.d('$tag > onEvent; type = $type; event = ${event.toPrettyPrint().generate()}');
   }
 
   @override
