@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:true_core/library.dart';
 
@@ -14,10 +15,6 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
       throw ArgumentError('repository is! BaseRepository');
     _repository = repository as BaseRepository;
   }
-
-  late final BaseRepository _repository;
-  bool _initialized = false;
-  bool _disposed = false;
   
   final T repository;
 
@@ -26,6 +23,11 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
   late final TContext context;
 
 
+  @override
+  Logger? get logger;
+
+  @override
+  late String tag = runtimeType.toString();
 
   @override
   bool get initialized => _initialized;
@@ -40,6 +42,8 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
     if(initialized)
       throw 'Bloc have been already initialized';
     _throwIfDisposed();
+
+    logger?.d('$tag > initState');
       
     this.context = context;
     
@@ -52,6 +56,8 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
   void onEvent(TEnum type, [IBlocEvent event = IBlocEvent.empty]) {
     _throwIfHaventInitialized();
     _throwIfDisposed();
+
+    logger?.d('$tag > onEvent; type = $type; event = ${event.toPrettyPrint().toString()}');
   }
 
   @override
@@ -61,10 +67,17 @@ abstract class BaseCommonBloc<T extends IRepository, TEnum extends Object, TCont
     _throwIfHaventInitialized();
     _throwIfDisposed();
 
+    logger?.d('$tag > dispose');
+
     storage.dispose();
 
     _disposed = true;
   }
+  
+
+  late final BaseRepository _repository;
+  bool _initialized = false;
+  bool _disposed = false;
 
   void _throwIfHaventInitialized() {
     if(!initialized)

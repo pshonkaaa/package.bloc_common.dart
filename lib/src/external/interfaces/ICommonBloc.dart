@@ -1,6 +1,12 @@
+import 'package:logger/logger.dart';
+
 import 'IBlocEvent.dart';
 
 abstract class ICommonBloc<TEnum, TContext> {
+
+  Logger? get logger;
+
+  String get tag;
   
   bool get initialized;
 
