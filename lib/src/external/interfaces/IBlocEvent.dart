@@ -1,4 +1,4 @@
-import 'package:foundation/library.dart';
+import 'package:pshondation/library.dart';
 
 abstract class IBlocEvent implements IPrettyPrint {
   static const IBlocEvent empty = const _EmptyEvent();
