@@ -1,6 +1,6 @@
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
-import 'package:true_core/library.dart';
+import 'package:foundation/library.dart';
 
 import 'base_repository.dart';
 import 'interfaces/ICommonBloc.dart';
